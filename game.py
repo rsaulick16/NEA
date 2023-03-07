@@ -1,5 +1,5 @@
 import pygame
-import spritesheet
+from spritesheet import *
 import time
 
 
@@ -16,11 +16,17 @@ y = 690
 
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Spritesheets')
-
-sprite_sheet_image = pygame.image.load('monkey2.bmp').convert_alpha()
-sprite_sheet = spritesheet.SpriteSheet(sprite_sheet_image)
-
+my_spritesheet = Spritesheet('monkey2.png')
+monkey_d1 = my_spritesheet.get_sprite(0,0,35,50)
+monkey_d2 = my_spritesheet.get_sprite(100,0,35,50)
+monkey_l1 = my_spritesheet.get_sprite(0,65,35,50)
+monkey_l2 = my_spritesheet.get_sprite(100,65,35,50)
+monkey_r1 = my_spritesheet.get_sprite(0,110,45,50)
+monkey_r2 = my_spritesheet.get_sprite(100,110,45,50)
+monkey_u1 = my_spritesheet.get_sprite(0,160,35,40)
+monkey_u2 = my_spritesheet.get_sprite(100,160,35,40)
+#monkey_d1 = pygame.transform.scale(monkey_d1, (50,70))
+#monkey_d2 = pygame.transform.scale(monkey_d2, (50,70))
 BG = (50, 50, 50)
 BLACK = (0, 0, 0)
 diamond = ((16, 16), (7, 7),
@@ -36,10 +42,7 @@ arrow = ((16, 16), (0, 0),
 
 
 
-frame_0 = sprite_sheet.get_image(0, 50, 50, 1, BLACK)
-frame_1 = sprite_sheet.get_image(2, 50, 50, 1, BLACK)
-frame_2 = sprite_sheet.get_image(2, 24, 24, 3, BLACK)
-frame_3 = sprite_sheet.get_image(3, 24, 24, 3, BLACK)
+
 start_img = pygame.image.load('game.jpg')
 def updateX(cap, direction):
     k = 0
@@ -67,7 +70,7 @@ def updateX(cap, direction):
                 k = 0
 
     
-def updateX(cap, direction):
+def updateY(cap, direction):
     j = 0
     if direction == 0:
         while y <= cap:
@@ -93,47 +96,252 @@ def updateX(cap, direction):
                 j = 0
 
 def spawnEnemy():
+    interval = 0.01
     x = 0
     y = 690
     k = 0
     while x <= 140:
         x = x + 10
         if k == 0:
-            screen.blit(frame_0, (690, x))
+            screen.blit(monkey_d1, (690, x))
             pygame.display.update()
             k = 1
         else:
-            screen.blit(frame_1, (690, x))
+            screen.blit(monkey_d2, (690, x))
             pygame.display.update()
             k = 0
-        time.sleep(0.1)
+        time.sleep(interval)
         screen.blit(start_img,(0,0))
-       # print(x)
     while y >= 580:
         y = y - 10
         if k == 0:
-            screen.blit(frame_0, (y, x))
+            screen.blit(monkey_l1, (y, x))
             pygame.display.update()
             k = 1
         else:
-            screen.blit(frame_1, (y, x))
+            screen.blit(monkey_l2, (y, x))
             pygame.display.update()
             k = 0
-        time.sleep(0.1)
+        time.sleep(interval)
         screen.blit(start_img,(0,0))
     while x >= 90:
         x = x - 10
         if k == 0:
-            screen.blit(frame_0, (y, x))
+            screen.blit(monkey_u1, (y, x))
             pygame.display.update()
             k = 1
         else:
-            screen.blit(frame_1, (y, x))
+            screen.blit(monkey_u2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while y >= 80:
+        y = y - 10
+        if k == 0:
+            screen.blit(monkey_l1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_l2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while x <= 270:
+        x = x + 10
+        if k == 0:
+            screen.blit(monkey_d1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_d2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+        print(y)
+    while y <= 170:
+        y = y + 10
+        if k == 0:
+            screen.blit(monkey_r1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_r2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while x >= 200:
+        x = x - 10
+        if k == 0:
+            screen.blit(monkey_u1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_u2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while y <= 260:
+        y = y + 10
+        if k == 0:
+            screen.blit(monkey_r1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_r2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while x <= 270:
+        x = x + 10
+        if k == 0:
+            screen.blit(monkey_d1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_d2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while y <= 360:
+        y = y + 10
+        if k == 0:
+            screen.blit(monkey_r1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_r2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while x >= 200:
+        x = x - 10
+        if k == 0:
+            screen.blit(monkey_u1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_u2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while y <= 460:
+        y = y + 10
+        if k == 0:
+            screen.blit(monkey_r1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_r2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while x <= 350:
+        x = x + 10
+        if k == 0:
+            screen.blit(monkey_d1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_d2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while y <= 580:
+        y = y + 10
+        if k == 0:
+            screen.blit(monkey_r1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_r2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while x >= 260:
+        x = x - 10
+        if k == 0:
+            screen.blit(monkey_u1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_u2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while y <= 690:
+        y = y + 10
+        if k == 0:
+            screen.blit(monkey_r1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_r2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while x <= 450:
+        x = x + 10
+        if k == 0:
+            screen.blit(monkey_d1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_d2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while y >= 350:
+        y = y - 10
+        if k == 0:
+            screen.blit(monkey_l1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_l2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while x >= 380:
+        x = x - 10
+        if k == 0:
+            screen.blit(monkey_u1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_u2, (y, x))
+            pygame.display.update()
+            k = 0
+        time.sleep(interval)
+        screen.blit(start_img,(0,0))
+    while y >= 1:
+        y = y - 10
+        if k == 0:
+            screen.blit(monkey_l1, (y, x))
+            pygame.display.update()
+            k = 1
+        else:
+            screen.blit(monkey_l2, (y, x))
             pygame.display.update()
             k = 0
         time.sleep(0.1)
         screen.blit(start_img,(0,0))
-       # print(x)
+#need to add a spawnEnenmy class
         
     
 
@@ -143,47 +351,19 @@ k= 0
 while run:
     a = pygame.mouse.get_pos()
     pygame.mouse.set_cursor(*pygame.cursors.arrow)
-    screen.blit(start_img,(0,0))
-    #time.sleep(10)
-    #screen.blit(frame_1, (0, 400))
-	#screen.blit(frame_2, (150, 0))
-	#screen.blit(frame_3, (250, 0))
-    #event handler
-    print(a)
-
-    
-
-
-
-        
+    screen.blit(start_img,(0,0))      
     for event in pygame.event.get():
-        if k <= 10:
-            spawnEnemy()
-            k = k+1
-
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT or event.key == ord('a'):
-                print('left')
-            if event.key == pygame.K_RIGHT or event.key == ord('d'):
-                print('right')
-            if event.key == pygame.K_UP or event.key == ord('w'):
-                print('jump')
-
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == ord('a'):
-                print('left stop')
-            if event.key == pygame.K_RIGHT or event.key == ord('d'):
-                print('right stop')
-   
-
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            spawnEnemy()
-            
-         
-         
-
-
-
+        if event.type == pygame.QUIT:
+            run = False
+    #screen.blit(monkey_d1, (100,0))
+    #screen.blit(monkey_d2, (0,0))
+    #screen.blit(monkey_l1, (0,0))
+    #screen.blit(monkey_l2, (0,0))
+    #screen.blit(monkey_r1, (0,0))
+    #screen.blit(monkey_r2, (0,0))
+    #screen.blit(monkey_u1, (0,0))
+    #screen.blit(monkey_u2, (0,0))
+    spawnEnemy()
 
 
     pygame.display.update()
