@@ -1,0 +1,56 @@
+import pygame
+
+# Initialize pygame
+pygame.init()
+
+# Set up the window
+win_width = 640
+win_height = 480
+win = pygame.display.set_mode((win_width, win_height))
+
+# Define player class
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.Surface((20, 20))
+        self.image.fill((0, 255, 0))
+        self.rect = self.image.get_rect()
+        self.rect.x = win_width/2 - self.rect.width/2
+        self.rect.y = win_height/2 - self.rect.height/2
+        self.clicks = 0
+
+    def update(self):
+        pass
+
+# Create player sprite
+player = Player()
+
+# Create sprite group for player
+player_group = pygame.sprite.Group(player)
+
+# Set up game loop
+clock = pygame.time.Clock()
+running = True
+while running:
+    # Handle events
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            # Check for collision with player sprite
+            if player.rect.collidepoint(event.pos):
+                player.clicks += 1
+                if player.clicks == 3:
+                    player.kill()
+
+    # Update and draw player
+    player_group.update()
+    win.fill((255, 255, 255))
+    player_group.draw(win)
+    pygame.display.update()
+
+    # Limit frame rate
+    clock.tick(60)
+
+# Clean up
+pygame.quit()
