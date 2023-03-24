@@ -9,6 +9,7 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
+
 #Movement stuff 
 #path_points = [(720, 6), (712,181), (585, 170), (580, 104), (92, 102), (95,303), (191,293), (196,221), (293,216), (292,300), (390,303), (400,211), (488,218), (500,396), (610,401), (603,282), (723,284), (720,473), (375,476), (370,402), (2,403)]
 #sprite_pos = pygame.math.Vector2(path_points[0])
@@ -42,11 +43,14 @@ arrow = ((16, 16), (0, 0),
 
 
 
-
+enemytime = time.time() + 5
 start_img = pygame.image.load('game.jpg')
 run = True
 x = 1
+b = 1
+k = 2
 monkey = Enemy()
+
 while run:
     a = pygame.mouse.get_pos()
     pygame.mouse.set_cursor(*pygame.cursors.arrow)
@@ -54,8 +58,41 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-    monkey.spawnSprite(monkey_d1)
-           
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            # Check if a clicked enemy collides with the mouse cursor
+            monkey.getHitbox(event)
+            """
+            if hitbox.collidepoint(event.pos):
+                monkey.health = monkey.health - 1
+                print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", monkey.health)
+            
+            if monkey.health <= 0:
+                    print("ASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+                    hitbox.move(100,100)
+                    monkey.j = 1
+            """        
+                 
+    #if monkey
+    monkey.setHitbox()
+    monkey.spawnSprite()
+    #hitbox = pygame.draw.rect(screen, (255,0,0), pygame.Rect(monkey.sprite_pos.x, monkey.sprite_pos.y, 60, 60),  2)
+    #pygame.display.flip()
+    
+    
+    #monkey2.spawnSprite(monkey_d1)
+    """
+    if time.time() >= enemytime:
+        temp = "monkey" + str(b)
+        b = b+1
+        (temp) = Enemy()
+        (temp).spawnSprite(monkey_d1)
+        
+        
+        # Reset the alarm.
+        enemytime = time.time() + 5
+
+    
+    """       
     #direction = target_point - self.sprite_pos
     #direction.normalize_ip()
     #self.sprite_pos += direction * self.sprite_speed
@@ -92,6 +129,6 @@ while run:
      #   x = x-1
      #   monkey.moveEnemy(monkey_d1,monkey_d2,monkey_l1,monkey_l2,monkey_u1,monkey_u2,monkey_r1,monkey_r2)
     #    print(x)
-    #pygame.display.update()
+    pygame.display.update()
 
 pygame.quit()
