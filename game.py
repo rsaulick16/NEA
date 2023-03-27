@@ -11,7 +11,7 @@ SCREEN_HEIGHT = 600
 
 
 #Movement stuff 
-#path_points = [(720, 6), (712,181), (585, 170), (580, 104), (92, 102), (95,303), (191,293), (196,221), (293,216), (292,300), (390,303), (400,211), (488,218), (500,396), (610,401), (603,282), (723,284), (720,473), (375,476), (370,402), (2,403)]
+#path_points = [(700, 6), (712,181), (585, 170), (580, 104), (92, 104), (95,303), (191,293), (196,221), (793,216), (292,300), (390,303), (400,211), (488,218), (500,396), (610,401), (603,282), (723,284), (720,473), (375,476), (370,402), (2,403)]
 #sprite_pos = pygame.math.Vector2(path_points[0])
 #target_point_index = 1
 #target_point = pygame.math.Vector2(path_points[target_point_index])
@@ -49,8 +49,12 @@ run = True
 x = 1
 b = 1
 k = 2
-monkey = Enemy()
-
+v = 1
+c = 0
+#monkey1 = Enemy()
+#monkey2 = Enemy()
+clock = pygame.time.Clock()
+spawn_timer = 0
 while run:
     a = pygame.mouse.get_pos()
     pygame.mouse.set_cursor(*pygame.cursors.arrow)
@@ -60,21 +64,25 @@ while run:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             # Check if a clicked enemy collides with the mouse cursor
-            monkey.getHitbox(event)
-            """
-            if hitbox.collidepoint(event.pos):
-                monkey.health = monkey.health - 1
-                print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", monkey.health)
-            
-            if monkey.health <= 0:
-                    print("ASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-                    hitbox.move(100,100)
-                    monkey.j = 1
-            """        
+            monkey1.getHitbox(event)
+            monkey2.getHitbox(event)
+    spawn_timer += clock.tick(60)
+    if spawn_timer >= 500:
+        name = "monkey" + str(v)
+        v=v+1
+        print(str(name))
+        (name) = Enemy()
+        (name).setHitbox()
+        (name).spawnSprite()
+        spawn_timer = 0
+    
+
                  
-    #if monkey
-    monkey.setHitbox()
-    monkey.spawnSprite()
+    
+    #monkey1.setHitbox()
+    #monkey1.spawnSprite()
+    #monkey2.setHitbox()
+    #monkey2.spawnSprite()
     #hitbox = pygame.draw.rect(screen, (255,0,0), pygame.Rect(monkey.sprite_pos.x, monkey.sprite_pos.y, 60, 60),  2)
     #pygame.display.flip()
     
